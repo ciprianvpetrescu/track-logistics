@@ -25,15 +25,31 @@ Nothing here talks to a ticketing system, an HR system, or a cloud console. It r
 
 ![Command centre](docs/images/dashboard.png)
 
-*Command view - tile readouts, the consignment map, the live API-key health strip and the operator log tail.*
+*Command view - status tile readouts, the consignment map, the courier API-key health strip and the operator log tail.*
 
 ![Consignment ledger](docs/images/ledger.png)
 
 *The ledger - one row per consignment, colour-coded by the resolved state of the outbound leg, with inline notes and per-row refresh.*
 
-![Stock reconciliation](docs/images/scanner.png)
+![Consignments](docs/images/consignments.png)
 
-*Stock reconciliation - scanned serials matched against an expected-inventory export, with outstanding-only filtering and CSV export.*
+*Consignment detail - both legs of a movement side by side, with the latest scan event and the resolved status for each carrier.*
+
+![Annotations and follow-ups](docs/images/analyst.png)
+
+*Operator journal - free-text notes attached to a ticket reference, and the follow-up queue for shipments that need a human.*
+
+![Customer comms](docs/images/comms.png)
+
+*Comms desk - template-driven customer replies built from the consignment state, with a fast-reply mode for one-line updates.*
+
+![Notes](docs/images/notes.png)
+
+*Shift notes - the running log of what changed during a shift, kept alongside the ledger rather than in a separate file.*
+
+![Mobile](docs/images/phone.png)
+
+*Phone view - the console is usable from a handset for reading state and firing a fast reply while away from the desk.*
 
 ---
 
