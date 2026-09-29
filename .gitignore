@@ -1,0 +1,20 @@
+node_modules/
+dist/
+build/
+.env
+*.log
+
+# Runtime state — the dashboard writes these as it runs.
+notes.json
+records_cache.json
+updates.json
+chat_history.json
+workspace_notes.json
+deleted_threads.json
+templates.json
+templates.backup-*.json
+*.xlsx
+*.crdownload
+
+# The repo ships a .sample of each state file instead.
+!*.sample.json

@@ -1,0 +1,149 @@
+/* ================================================================
+   MISSION CONTROL — design tokens
+   Industrial ops-console language: flat charcoal surfaces, safety
+   orange accent, bone-white text. Hard edges, hairline rules,
+   labelled header strips. No blur, no glow, no rounding.
+   ================================================================ */
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono-console: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --color-void: #0d0d0d;
+  --color-hull: #141414;
+  --color-surface: #1a1a1a;
+  --color-header: #222222;
+  --color-inset: #101010;
+
+  --color-rule: #2e2e2e;
+  --color-rule-strong: #3d3d3d;
+
+  --color-accent: #ff6b1a;
+  --color-signal-amber: #ffb000;
+  --color-signal-green: #3fb950;
+  --color-signal-red: #f85149;
+  --color-signal-blue: #58a6ff;
+
+  --color-ink: #e8e6e3;
+  --color-ink-2: #a8a29e;
+  --color-ink-3: #6b6660;
+}
+
+:root {
+  --bg-void: #0d0d0d;
+  --bg-hull: #141414;
+  --bg-surface: #1a1a1a;
+  --bg-header: #222222;
+  --bg-inset: #101010;
+
+  --rule: #2e2e2e;
+  --rule-strong: #3d3d3d;
+
+  --accent: #ff6b1a;
+  --accent-dim: #b34a12;
+  --signal-amber: #ffb000;
+  --signal-green: #3fb950;
+  --signal-red: #f85149;
+  --signal-blue: #58a6ff;
+
+  --text-primary: #e8e6e3;
+  --text-secondary: #a8a29e;
+  --text-muted: #6b6660;
+  --text-dim: #4a4642;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: var(--bg-void);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  margin: 0;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Every surface is square. Kill inherited rounding globally. */
+* {
+  border-radius: 0 !important;
+}
+
+.font-console {
+  font-family: var(--font-mono-console);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Panel header strip: the signature element of this theme. */
+.panel-label {
+  font-family: var(--font-mono-console);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* Registration ticks in panel corners — technical drawing cue. */
+.corner-ticks::before,
+.corner-ticks::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-color: var(--accent);
+  pointer-events: none;
+  opacity: 0.75;
+}
+.corner-ticks::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+.corner-ticks::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-inset);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--rule-strong);
+  border: 2px solid var(--bg-inset);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-dim);
+}
+
+select,
+input,
+textarea {
+  font-family: var(--font-mono-console);
+}
+
+select:focus,
+input:focus,
+textarea:focus {
+  outline: 1px solid var(--accent);
+  outline-offset: -1px;
+}
+
+/* Hatched warning fill, used for degraded/offline states. */
+.hatch-warn {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--signal-red) 0px,
+    var(--signal-red) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}

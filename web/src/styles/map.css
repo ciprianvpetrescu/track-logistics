@@ -1,0 +1,143 @@
+/* ================================================================
+   Mission Control map treatment — the map is now a full-bleed
+   backdrop layer that panels sit on top of, so it reads darker and
+   flatter than a foreground card would.
+   ================================================================ */
+
+.leaflet-container {
+  background: var(--bg-void) !important;
+  font-family: var(--font-sans);
+}
+
+/* Lift the basemap: Carto dark tiles are near-black out of the box, so
+   brighten rather than dim, and keep some desaturation so the orange
+   vectors still read as the brightest thing on screen. */
+.leaflet-tile-pane {
+  filter: grayscale(0.45) brightness(1.55) contrast(0.95);
+}
+
+.leaflet-popup-content-wrapper {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--rule-strong);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7) !important;
+  color: var(--text-primary);
+  padding: 0 !important;
+}
+.leaflet-popup-content {
+  margin: 0 !important;
+  font-family: var(--font-mono-console);
+  width: auto !important;
+}
+.leaflet-popup-tip {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--rule-strong);
+}
+.leaflet-popup-close-button {
+  color: var(--text-muted) !important;
+  font-weight: 400 !important;
+  padding: 6px 8px 0 0 !important;
+}
+.leaflet-popup-close-button:hover {
+  color: var(--accent) !important;
+}
+
+.popup-head {
+  background: var(--bg-header);
+  border-bottom: 1px solid var(--rule);
+  padding: 5px 10px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+}
+.popup-body {
+  padding: 8px 10px;
+  font-size: 11px;
+  line-height: 1.6;
+}
+.popup-body .k {
+  color: var(--text-muted);
+}
+
+/* Square nodes with a hard center pip — no soft glowing dots. */
+.map-node {
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--bg-void);
+  box-sizing: border-box;
+  position: relative;
+}
+.map-node::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: var(--bg-void);
+}
+.map-node--outbound { background: var(--accent); }
+.map-node--inbound { background: var(--signal-blue); }
+.map-node--error { background: var(--signal-red); }
+
+/* Origin marker: crosshair reticle rather than a glowing bead. */
+.origin-reticle {
+  width: 22px;
+  height: 22px;
+  position: relative;
+}
+.origin-reticle::before,
+.origin-reticle::after {
+  content: "";
+  position: absolute;
+  background: var(--accent);
+}
+.origin-reticle::before {
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  transform: translateX(-50%);
+}
+.origin-reticle::after {
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  transform: translateY(-50%);
+}
+.origin-reticle span {
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--accent);
+}
+
+.map-radar-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Grid graticule over the map — survey-chart cue. */
+.map-graticule {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 401;
+  background-image:
+    linear-gradient(rgba(255, 107, 26, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 107, 26, 0.035) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* Light vignette — just enough to seat the panel edges, not enough to
+   swallow the coastlines. */
+.map-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 402;
+  background: radial-gradient(ellipse at center, transparent 60%, rgba(13, 13, 13, 0.45) 100%);
+}
